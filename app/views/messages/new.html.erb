@@ -1,0 +1,8 @@
+<p>New Message</p>
+<%= @channel.name %>
+<%= form_for [@message, @channel] do |f| %>
+    <%= f.label :content %>
+    <%= f.text_field 'Message' :content, {placeholder: 'Type your message here...'}%>
+
+
+<% end %>

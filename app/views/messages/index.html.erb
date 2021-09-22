@@ -1,0 +1,9 @@
+<h1>Messages</h1>
+
+<ul>
+  <% @messages.each do |message| %>
+    <li>Sender: <%= message.user.email %>
+    <li>Content: <%= message.content %></li>
+    <li>Channel: <%= message.channel.name %></li>
+  <% end %>
+</ul>
