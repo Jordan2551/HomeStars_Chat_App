@@ -17,14 +17,14 @@ channels = Channel.create(
 # Create channels to facilitate user flow
 users = User.create(
 [
-    {email: "sodales.at@porttitortellus.org", password: "gVOnJJOYp56N3sOi", password_confirmation: "gVOnJJOYp56N3sOi"},
-    {email: "ornare.lectus@nuncacsem.ca", password: "CmriFIWXV3GFInTX", password_confirmation: "CmriFIWXV3GFInTX"},
+    {email: "sodales@port.org", password: "gVOnJJOYp56N3sOi", password_confirmation: "gVOnJJOYp56N3sOi"},
+    {email: "ornare@abc.ca", password: "CmriFIWXV3GFInTX", password_confirmation: "CmriFIWXV3GFInTX"},
     {email: "magna@lectus.net", password: "744HRlwEWf2Sk5se", password_confirmation: "744HRlwEWf2Sk5se"},
-    {email: "eros@fuscedolor.co.uk", password: "CJAfl8vMXr0iT3xe", password_confirmation: "CJAfl8vMXr0iT3xe"},
-    {email: "ultricies@tuermauris.ca", password: "wXlUmOjXk6WnPwYi", password_confirmation: "wXlUmOjXk6WnPwYi"},
-    {email: "sed.dictum@penatibuset.edu", password: "tGLMHPSMogw9u2Rr", password_confirmation: "tGLMHPSMogw9u2Rr"},
-    {email: "scelerisque@ligula.ca", password: "Y17mpMSsjfiEiMAE", password_confirmation: "Y17mpMSsjfiEiMAE"},
-    {email: "ros@liguladonec.co.uk", password: "xJa0K51OpyGi5d3h", password_confirmation: "xJa0K51OpyGi5d3h"}
+    {email: "eros@taaf.ca", password: "CJAfl8vMXr0iT3xe", password_confirmation: "CJAfl8vMXr0iT3xe"},
+    {email: "ultr@tueis.ca", password: "wXlUmOjXk6WnPwYi", password_confirmation: "wXlUmOjXk6WnPwYi"},
+    {email: "sed@penet.edu", password: "tGLMHPSMogw9u2Rr", password_confirmation: "tGLMHPSMogw9u2Rr"},
+    {email: "sceler@ligula.ca", password: "Y17mpMSsjfiEiMAE", password_confirmation: "Y17mpMSsjfiEiMAE"},
+    {email: "ros@lig.co.uk", password: "xJa0K51OpyGi5d3h", password_confirmation: "xJa0K51OpyGi5d3h"}
 ])
 
 # Create user_channels to facilitate the M2M association of user_id -> channel_id
