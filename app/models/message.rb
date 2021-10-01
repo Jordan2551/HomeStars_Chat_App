@@ -4,5 +4,5 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :channel
 
-  validates :content, presence: true, length: {minimum: 5, maximum:10}
+  validates :content, presence: true, length: {minimum: 1, maximum:50}
 end

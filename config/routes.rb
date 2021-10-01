@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   root to: "application#index"
+  mount ActionCable.server => '/cable'
 
-  devise_for :users
+  # Routing scheme: /api/v1 for all public API URIs
+  scope :api, defaults: {format: :json} do
+    scope :v1, defaults: {format: :json} do 
 
-  # Routing scheme: /api/v1 for all of our public API URIs
-  namespace :api do
-    namespace :v1 do 
+        devise_for :users
+
+        scope :users do 
+          get "messages", to: "messages#index_user"
+          get "channels", to: "users#index_channel"
+          post "channels/:channel_id", to: "users#create_channel"
+          delete "channels/:channel_id", to: "users#destroy_channel"
+        end
+
         resources :channels, only: [:index, :show] do
           get "messages", to: "messages#index_channel"
-          post "users/:user_id/messages", to: "messages#create"
+          post "users/messages", to: "messages#create"
         end
-        get "users/:user_id/messages", to: "messages#index_user"
       end
     end
 

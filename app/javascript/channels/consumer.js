@@ -3,4 +3,6 @@
 
 import { createConsumer } from "@rails/actioncable"
 
-export default createConsumer()
+// Singleton consumer per connection
+export default createConsumer();
+

@@ -34,7 +34,7 @@ end
 
 # Create a welcome message for each channel our database
 channels.each do |channel|
-    message = Message.create(content: "Welcome to the #{channel.name} channel!", user_id: channel.users.first.id, channel_id: channel.id)
+    Message.create!(content: "Welcome to the #{channel.name} channel!", user_id: channel.users.first.id, channel_id: channel.id)
 end
 
 
