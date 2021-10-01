@@ -42,4 +42,6 @@ React UI:
 
 Running the App:
   * Run **rails s** to run both the react and rails apps then navigate to **http://localhost:3000**
+  * In order to use chatting / messaging features, make sure to log in first. You can use any of the username, password combinations found in **seeds.rb**
+    * Example user:sodales@port.org password:gVOnJJOYp56N3sOi
 
