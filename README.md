@@ -20,11 +20,13 @@ If I had additional time / next steps:
 * Adding end-to-end testing for React using Jest
 * Polishing up some styling on some React components in order to ensure more reusability.
 * Adding a color indicator in chat channels that shows which messages they sent.
+* Creating a docker-compose file with the appropriate configurations (node, ruby, rails, redis, postgres, etc) to easily run this application in an isolated environment.
 
 Instructions on how to run codebase:
 
 Rails API:
 * Run **rails db:setup** for first time setup or rails db:reset to reset the database (the setup includes preloaded data located in seeds.rb)
+  * NOTE: database used in this scenario is postgres. Feel free to change DB adapter to whatever you prefer in **datbase.yml**
 * Run **bundle install** to install the needed gems included in gemfile
 * IMPORTANT: the app uses JWT for user authentication, which means it needs a token to issue signatures to clients. Therefore please add a secret named "jwt_secret_key" in the rails stored credentials by doing the following:
   * Run **EDITOR=vim bin/rails credentials:edit**
