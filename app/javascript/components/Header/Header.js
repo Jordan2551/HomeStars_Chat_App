@@ -10,7 +10,7 @@ import { Typography } from "@mui/material";
 
 const Header = (props) => {
     const {classes, logout, isLoggedin, user} = props;
-    console.log(user);
+    
     return (
         <Box className={classes.headerContainer}>
             <AppBar position="static">

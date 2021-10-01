@@ -1,4 +1,14 @@
 
+# TODO:: CLEAR OUT ALL TODOS
+# TO GET TO WORK:
+# RUN seed (runs automatically I think?)
+# ADD JWT SECRET FOR DEVISE JWT
+# CREATE THE DB
+# TRY THIS FRESH IN A NEW FOLDER?
+# REDIS
+
+# NICE TO HAVE: HERO SECTION for HOME section
+
 class UsersController < ApplicationController
     before_action :authenticate_user!
 

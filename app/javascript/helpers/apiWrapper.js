@@ -34,8 +34,7 @@ class APIWrapper{
                             setErrors(errorContent);
                     break;
                 }
-                console.error(error.response);
-                // Send out a snack message with error content
+                console.error("API_WRAPPER LOGGER:", error.response);
             }
         }
     }

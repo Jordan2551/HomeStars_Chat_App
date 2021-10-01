@@ -13,7 +13,8 @@ const Channels = () => {
         let result = await APIWrapper.handleAPIRequest(() => axios.get(`${API_PATH}/channels`));
         setChannels(result);
 
-        await getUserChannels();
+        if(result)
+            await getUserChannels();
     }, [])
 
     const getUserChannels = async () => {
