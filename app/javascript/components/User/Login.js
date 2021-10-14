@@ -1,16 +1,15 @@
 import { Button, Card, Grid, TextField, Typography } from "@mui/material";
 import { withStyles } from "@mui/styles";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { login, setEmail, setPassword } from "../../redux/actions/user";
 import FormErrors from "../Global/FormErrors";
 import style from "./style";
 
 const Login = (props) => {
-    const {classes, login} = props;
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const {classes, setEmail, setPassword, login, user} = props;
+    const {email, password} = user;
     const [errors, setErrors] = useState([]);
-
     return (
         <div style={{textAlign: "center"}}>
             <Grid container direction="column" spacing={2} width="350px" marginLeft="auto" marginRight="auto" textAlign="center">
@@ -41,7 +40,7 @@ const Login = (props) => {
                     <Button 
                         fullWidth 
                         variant="contained" 
-                        onClick={() => login(email, password, setErrors)}
+                        onClick={() => login(setErrors)}
                         disabled={email.length === 0 || password.length === 0}
                     >
                         Login
@@ -53,4 +52,18 @@ const Login = (props) => {
     )
 }
 
-export default withStyles(style)(Login)
+const mapStateToProps = (state) => {
+    return({
+        user: state.user.user,
+    });
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return({
+        setEmail: (email) => dispatch(setEmail(email)),
+        setPassword: (password) => dispatch(setPassword(password)),
+        login: (setErrors) => dispatch(login(setErrors)),
+    });
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(Login));

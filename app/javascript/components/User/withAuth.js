@@ -18,23 +18,23 @@ const withAuth = (WrappedComponent) => {
             await login('', '');
         }, []);
         
-        const login = async (email, password, setErrors) => {
-            try{
-                const body = {user: { email, password}};
+        // const login = async (email, password, setErrors) => {
+        //     try{
+        //         const body = {user: { email, password}};
     
-                const result = await axios.post(`${API_PATH}/users/sign_in`, body);
-                setIsLoggedin(true);
-                setUser(result.data);
+        //         const result = await axios.post(`${API_PATH}/users/sign_in`, body);
+        //         setIsLoggedin(true);
+        //         setUser(result.data);
 
-                // Redirect to channels path after login
-                history.push("/channels");
-            }catch(error){
-                const errorContent = error.response.data.error;
+        //         // Redirect to channels path after login
+        //         history.push("/channels");
+        //     }catch(error){
+        //         const errorContent = error.response.data.error;
 
-                if(setErrors !== undefined)
-                    setErrors([errorContent])
-            }
-        }
+        //         if(setErrors !== undefined)
+        //             setErrors([errorContent])
+        //     }
+        // }
 
         const logout = async () => {
             const body = {

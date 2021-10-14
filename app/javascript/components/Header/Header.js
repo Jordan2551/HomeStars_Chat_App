@@ -7,9 +7,12 @@ import {Link} from 'react-router-dom';
 import { withStyles } from "@mui/styles";
 import styles from "./styles";
 import { Typography } from "@mui/material";
+import { logout } from "../../redux/actions/user";
+import { connect } from "react-redux";
 
 const Header = (props) => {
-    const {classes, logout, isLoggedin, user} = props;
+    const {classes, logout, user} = props;
+    const {isLoggedIn} = user;
     
     return (
         <Box className={classes.headerContainer}>
@@ -19,7 +22,7 @@ const Header = (props) => {
                 <Link to="/channels" className={classes.navLink}>Channels</Link>
                 <Link to={`/users/messages`} className={classes.navLink}>Messages</Link>
                 {
-                    isLoggedin ?
+                    isLoggedIn ?
                         <div style={{marginLeft: 'auto'}}>
                             <Typography component="p" variant="p" display="inline-block">{user.email}</Typography> | 
                             <Button onClick={logout} display="inline-block" style={{color: '#ffff'}}>LOGOUT</Button>
@@ -33,4 +36,16 @@ const Header = (props) => {
     )
 }
 
-export default withStyles(styles)(Header);
+const mapStateToProps = (state) => {
+    return({
+        user: state.user.user,
+    });
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));

@@ -4,9 +4,11 @@ module ApplicationCable
 
         def connect
             self.current_user = current_user
+            puts "---CONNECT"
         end
 
         def disconnect
+            puts "---DISCONNECTION"
             ActionCable.server.remote_connections.where(current_user: :current_user).disconnect()
         end
     end

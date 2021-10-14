@@ -2,7 +2,7 @@ import {Router, Route, Switch, Redirect} from "react-router-dom";
 import Channels from "./Channels/Channels";
 import Welcome from "./Pages/Welcome";
 import _404 from "./Pages/_404";
-import React from "react";
+import React, { useEffect } from "react";
 import Channel from "./Channel/Channel";
 import UserMessages from "./Messages/UserMessages";
 import history from "../helpers/history";
@@ -13,20 +13,24 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import Header from "./Header/Header";
-import withAuth from "./User/withAuth";
-import Login from "./User/Login";
 
-const App = ({isLoggedin, login, logout, user}) => {
+import Header from "./Header/Header";
+import Login from "./User/Login";
+import { connect } from "react-redux";
+import { login } from "../redux/actions/user";
+
+const App = ({login, logout, user}) => {
+    useEffect(() => {
+        console.log("CALLING LOGIN");
+        login();
+    }, [])
+
     return(
         <>
             <Router history={history}>
                 <CssBaseline>
-                    <Header 
-                        isLoggedin={isLoggedin}
-                        logout={logout}
-                        user={user}
-                    />
+                    aaa
+                    <Header/>
                     <Container>
                         <Switch>
                             <Route exact path="/channels">
@@ -57,4 +61,17 @@ const App = ({isLoggedin, login, logout, user}) => {
     )
 }
 
-export default withAuth(App);
+const mapStateToProps = (state) => {
+    return({
+        user: state.user.user,
+    });
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: () => dispatch(login()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

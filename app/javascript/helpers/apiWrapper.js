@@ -7,10 +7,10 @@ class APIWrapper{
      * @param {Function(setErrors(errors<Array>))} setErrors - (OPTIONAL) if the handler encounters any errors in request, the handler will provide the errors in an array
      * @returns 
      */
-    static async handleAPIRequest(func, setErrors){
+    static async handleAPIRequest(func, setErrors, redirect = true){
         try{
             const result = await func();
-            return result.data.data;
+            return result.data.data ? result.data.data : result.data;
         }catch(error){
             if(error.response){     
                 // Handle error by looking at status code
@@ -20,16 +20,23 @@ class APIWrapper{
                     break;
                         
                     case 401:
-                        history.replace("/login");
+                        let errorContent = error.response.data.error;
+                        if(setErrors !== undefined)
+                            setErrors([errorContent]);
+
+                        if(redirect)
+                            history.replace("/login");
                     break;
 
                     case 403:
-                        history.replace("/channels");
                         alert(error.response.data.errors.content);
+
+                        if(redirect)
+                            history.replace("/channels");
                     break;
 
                     case 422:
-                        const errorContent = error.response.data.error.content;
+                        errorContent = error.response.data.error.content;
                         if(setErrors !== undefined)
                             setErrors(errorContent);
                     break;
