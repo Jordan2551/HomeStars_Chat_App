@@ -21,7 +21,6 @@ import { login } from "../redux/actions/user";
 
 const App = ({login, logout, user}) => {
     useEffect(() => {
-        console.log("CALLING LOGIN");
         login();
     }, [])
 
@@ -29,14 +28,13 @@ const App = ({login, logout, user}) => {
         <>
             <Router history={history}>
                 <CssBaseline>
-                    aaa
                     <Header/>
                     <Container>
                         <Switch>
                             <Route exact path="/channels">
                                 <Channels/>
                             </Route>
-                            <Route exact path="/channel/:id">
+                            <Route path="/channel/:id/:limit/:offset">
                                 <Channel/>
                             </Route>
                             <Route exact path="/users/messages">

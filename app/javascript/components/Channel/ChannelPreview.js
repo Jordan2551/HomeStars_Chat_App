@@ -1,7 +1,7 @@
 // import { Button } from "@mui/material";
 import { IconButton, Tooltip, Typography } from '@mui/material';
 import React from "react";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -20,7 +20,6 @@ import axios from "axios";
 const ChannelPreview = (props) => {
     const {id, attributes, inChannel, getUserChannels, classes} = props;
     const {name, image} = attributes;
-    const {path, url} = useRouteMatch();
 
     const joinChannel = async () => {
         const result = await APIWrapper.handleAPIRequest(() => axios.post(`${API_PATH}/users/channels/${id}`));
@@ -46,7 +45,8 @@ const ChannelPreview = (props) => {
             <CardActions >
                 {inChannel && (
                     <Button>
-                        <Link className={classes.cardActionLink} to={`channel/${id}`}>Visit Channel</Link>
+                        {/*/channel/:id/:limit?/:offset?"> */}
+                        <Link className={classes.cardActionLink} to={`channel/${id}/10/0`}>Visit Channel</Link>
                     </Button>
                 )}
                 <div className={classes.joinRemoveActionContainer}>

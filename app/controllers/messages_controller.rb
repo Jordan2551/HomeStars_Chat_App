@@ -1,12 +1,14 @@
 
 class MessagesController < ApplicationController
     before_action :authenticate_user!
-    before_action :user_allowed_in_channel, only: [:index_channel, :create]
+    before_action :user_allowed_in_channel, only: [:index_channel, :create, :edit]
 
     # GET /api/v1/channels/:channel_id/messages - Get all messages for channel
     def index_channel
+      offset = params[:offset].to_i * params[:limit].to_i
+      limit = params[:limit].to_i
       channel = Channel.find(params[:channel_id])
-      messages = channel.messages.order("created_at DESC")
+      messages = channel.messages.order("created_at DESC").offset(offset).limit(limit) # TODO:: initial_timestamp issue?
 
       render json: MessageSerializer.new(messages).serialized_json
     end
@@ -26,9 +28,31 @@ class MessagesController < ApplicationController
       
       if message.save
         message_serialized = MessageSerializer.new(message)
+        message_result = message_serialized.serializable_hash
+        message_result[:data][:status] = 201 # Created
 
         # Broadcast message to all consumers subscribed to this channel
-        ActionCable.server.broadcast("chat#{params[:channel_id]}", message_serialized.serializable_hash)
+        ActionCable.server.broadcast("chat#{params[:channel_id]}", message_result)
+        
+        render json: message_serialized.serialized_json
+      else
+        render json: {error: message.errors.messages }, status: 422
+      end
+    end
+
+    def edit
+      user = current_user
+
+      message = Message.find(params[:id])
+      message.content = params[:message][:content]
+      
+      if message.save
+        message_serialized = MessageSerializer.new(message)
+        message_result = message_serialized.serializable_hash
+        message_result[:data][:status] = 204 # Updated
+
+        # Broadcast message to all consumers subscribed to this channel
+        ActionCable.server.broadcast("chat#{params[:channel_id]}", message_result)
         
         render json: message_serialized.serialized_json
       else

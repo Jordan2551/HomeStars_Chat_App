@@ -16,8 +16,9 @@ Rails.application.routes.draw do
         end
 
         resources :channels, only: [:index, :show] do
-          get "messages", to: "messages#index_channel"
+          get "messages/:limit/:offset/:initial_timestamp", to: "messages#index_channel", defaults: { limit: 1000, offset: 0, initial_timestamp: Time.now}
           post "users/messages", to: "messages#create"
+          put "users/messages/:id", to: "messages#edit" 
         end
       end
     end
